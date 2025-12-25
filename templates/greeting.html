@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Merry Christmas</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<canvas id="stars"></canvas>
+
+<h1 class = "msgg">
+    🎄 Happy Marry Christmas and a happy new year from <span> 
+        Isaac Wandera</span> 🎄
+</h1>
+
+<h1 class="msg">
+    Wishing you a joyful Christmas filled with love, laughter, and cherished moments with family and friends. 
+    May the New Year bring you happiness, success, and countless blessings. 
+    Merry Christmas and a Happy New Year!
+    <br>
+    <hr>
+    🎉🎊🎇🎆🎇<span><u><i>{{name}}</i></u></span>🎇🎆🎇🎉🎊
+</h1>
+
+<audio id="bgMusic" autoplay loop>
+    <source src="/static/music/christmas.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+    // autoplay fix for browsers (plays after first click/tap if blocked)
+    document.body.addEventListener("click", () => {
+        document.getElementById("bgMusic").play();
+    });
+</script>
+
+
+<script src="/static/stars.js"></script>
+<script src="/static/snow.js"></script>
+</body>
+</html>
