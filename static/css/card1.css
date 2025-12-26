@@ -1,0 +1,391 @@
+/* Full-page background */
+body{
+    margin:0;
+    background:#000;
+    overflow:auto; /* ✅ changed from hidden to auto */
+    display:flex;
+    justify-content:center;
+    align-items:flex-start; /* allow content to flow top-down */
+    min-height:100vh;
+    flex-direction:column;
+    font-family: 'Poppins', sans-serif;
+    color:white;
+}
+
+/* Main message */
+.card-message{
+    text-align:center;
+    padding:20px;
+    max-width:90%;
+    position: relative;
+    z-index: 10;
+    padding-bottom:170px; /* space above trees */
+}
+
+/* Title glow */
+.card-message .glow{
+    font-size: clamp(26px, 6vw, 60px);
+    color: gold;
+    text-shadow:0 0 20px red,0 0 30px yellow;
+}
+
+/* Note, From, Reply Title */
+.note, .from, .reply-title {
+    text-shadow:0 0 6px rgba(255,255,255,0.8);
+}
+
+.note{
+    font-size: 1.5rem;
+    line-height: 1.4;
+    font-weight: 400;
+    margin-top: 15px;
+    color: #fff;
+}
+
+.glow{
+    color:#fff;
+    text-shadow:0 0 10px #ff0000, 0 0 20px #ffd900, 0 0 30px #ff6a00;
+}
+
+.from{
+    margin-top:10px;
+    font-size: clamp(18px, 4vw, 30px);
+    color: #00eaff;
+}
+
+/* Bottom Christmas Trees Row */
+.tree {
+    position: absolute;
+    bottom: 0;
+    width: 11%;
+    min-width: 50px; /* slightly smaller for small screens */
+    filter: drop-shadow(0 0 6px rgba(255,255,255,0.6));
+}
+
+/* Left side set (trees 1,2,3) */
+.tree1 { left: 2%; }
+.tree2 { left: 10%; }
+.tree3 { left: 18%; }
+
+/* Right side set (trees 4,5,6) */
+.tree4 { right: 2%; }
+.tree5 { right: 10%; }
+.tree6 { right: 18%; }
+
+/* Tree images responsive */
+.trees-left img,
+.trees-right img{
+    max-width:130px;
+    width:22vw;
+    height:auto;
+    opacity:0.95;
+    filter: drop-shadow(0 0 8px #fddc6c);
+    animation: treeGlow 2.5s ease-in-out infinite alternate;
+}
+
+/* Tree Glow Animation */
+@keyframes treeGlow{
+    0%{ filter: drop-shadow(0 0 5px #ff5151); }
+    50%{ filter: drop-shadow(0 0 12px #6ce6ff); }
+    100%{ filter: drop-shadow(0 0 7px #fddc6c); }
+}
+
+/* Position Left Trees */
+.trees-left{
+    position:fixed;
+    bottom:0;
+    left:0;
+    display:flex;
+    gap:2vw;
+    padding:1vw;
+    z-index:5;
+}
+
+/* Position Right Trees */
+.trees-right{
+    position:fixed;
+    bottom:0;
+    right:0;
+    display:flex;
+    gap:2vw;
+    padding:1vw;
+    z-index:5;
+}
+
+/* Mobile Responsive */
+@media(max-width:600px){
+    .trees-left img, 
+    .trees-right img{
+        max-width:90px;
+        width:28vw;
+    }
+}
+
+/* Falling gifts container */
+.fall-container{
+    position:fixed;
+    top:0;
+    width:100%;
+    height:100%;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+/* Gifts style */
+.gift{
+    position:absolute;
+    width:clamp(25px,6vw,60px);
+    animation:fall linear infinite;
+    opacity:0.9;
+}
+
+/* Animation */
+@keyframes fall{
+    0%{ transform:translateY(-10%); }
+    100%{ transform:translateY(110vh); }
+}
+
+/* ⭐ Snow Falling */
+.snowflake {
+    position: fixed;
+    top: -10px;
+    font-size: 18px;
+    color: white;
+    opacity: 0.8;
+    animation: snowfall linear infinite;
+}
+
+@keyframes snowfall {
+    from { transform: translateY(-10vh); }
+    to { transform: translateY(110vh); }
+}
+
+/* ✨ Stars Falling */
+.star {
+    position: fixed;
+    top: -10px;
+    font-size: 14px;
+    color: gold;
+    opacity: 0.9;
+    animation: starFall linear infinite;
+}
+
+@keyframes starFall {
+    from { transform: translateY(-10vh); }
+    to { transform: translateY(110vh); }
+}
+
+@keyframes moveHorizontal {
+    0% { left: -10vw; }
+    50% { left: 50vw; }
+    100% { left: 110vw; }
+}
+
+/* Responsive container */
+.message-box {
+    text-align: center;
+    padding: 20px;
+    width: 90%;
+    max-width: 600px;
+    margin: 120px auto 0;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(6px);
+    border-radius: 15px;
+    color: #fff;
+    font-size: 1.6rem;
+    box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+
+/* Sound Button */
+#soundBtn{
+    position: relative; /* change from fixed */
+    margin-bottom: 20px; /* space between button and text */
+    background: rgba(255,255,255,0.2);
+    border: none;
+    font-size: 1.8rem; /* adjust for readability */
+    padding: 8px 12px;
+    border-radius: 8px;
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    color: #fff;
+    transition: .3s;
+}
+
+#soundBtn:hover{
+    transform: scale(1.15);
+}
+
+
+/* Dancing Santa Video */
+.dancing-santa{
+    position: fixed;
+    bottom: 10vh; 
+    left: 50%;
+    transform: translateX(-50%);
+    width: 15vw;
+    max-width:260px;
+    min-width:150px;
+    z-index: 1; 
+    opacity: 0.8;
+    pointer-events: none;
+    animation: santaBounce 2s ease-in-out infinite;
+    filter: drop-shadow(0 0 18px rgba(255,255,255,0.9));
+}
+
+@keyframes santaBounce{
+    0%   { transform: translate(-50%,0) scale(1); }
+    50%  { transform: translate(-50%,-2vh) scale(1.05); }
+    100% { transform: translate(-50%,0) scale(1); }
+}
+
+/* Glow Behind Santa */
+.dancing-santa::before{
+    content:"";
+    position:absolute;
+    top:50%;
+    left:50%;
+    width:20vw;
+    height:20vw;
+    max-width:350px;
+    max-height:350px;
+    background:radial-gradient(circle, rgba(255,200,0,0.6) 0%, rgba(255,0,0,0.2) 60%, transparent 90%);
+    transform: translate(-50%, -50%);
+    border-radius:50%;
+    filter: blur(25px);
+    z-index:-1;
+    animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse{
+    0%   { opacity:0.6; transform:translate(-50%,-50%) scale(1); }
+    50%  { opacity:1;   transform:translate(-50%,-50%) scale(1.15); }
+    100% { opacity:0.6; transform:translate(-50%,-50%) scale(1); }
+}
+
+/* Reply Section Styling */
+/* reply box glow transparent */
+.reply-section{
+    margin-top: 40px;
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(4px);
+    border: 2px solid rgba(255,255,255,0.3);
+    box-shadow: 0 0 15px gold, 0 0 25px rgba(255,215,0,0.4);
+    position: relative;   /* ensures z-index works */
+    z-index: 10;          /* in front of trees */
+}
+
+/* ===== Larger Reply Input & Textarea ===== */
+.reply-section input,
+.reply-section textarea{
+    width: 95%;
+    font-size: 20px;               /* bigger text */
+    padding: 16px;                  /* bigger fields */
+    border-radius: 12px;            /* soft rounded edges */
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(3px);
+    border: 1px solid gold;
+    color: white;
+    box-shadow: 0 0 15px gold inset;
+    z-index: 10;
+}
+
+/* ===== Rounded Send Button ===== */
+.reply-btn{
+    background: transparent;
+    color: white;
+    border: 2px solid gold;
+    box-shadow: 0 0 12px gold, 0 0 20px yellow;
+    font-weight: bold;
+    padding: 14px 28px;
+    border-radius: 50px;           /* fully rounded */
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.reply-btn:hover{
+    background: gold;
+    color: black;
+}
+
+/* Ensures reply stays visible on small screens */
+.card-message {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+
+/* Status text */
+#replyStatus{
+    margin-top:10px;
+    font-style:italic;
+    color:lightgreen;
+}
+
+/* Success Popup Notification */
+#successPopup {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #00c853;
+    color: white;
+    font-size: 20px;
+    padding: 12px 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #00ff7f;
+    display: none;
+    animation: popupFade 3s forwards;
+    z-index: 9999;
+    text-shadow: 0 0 5px #fff;
+}
+
+@keyframes popupFade {
+    0% {opacity: 0; transform: translate(-50%,20px);}
+    10% {opacity: 1; transform: translate(-50%,0);}
+    90% {opacity: 1;}
+    100% {opacity: 0; transform: translate(-50%,-20px);}
+}
+
+
+/* Small screen adjustments */
+@media(max-width:600px){
+    .card-message{
+        padding-bottom:220px; /* extra space for trees and santa */
+    }
+
+    #soundBtn{
+        font-size:4vw;
+        padding:2vw 3vw;
+    }
+
+    .reply-section textarea{
+        width:90%;
+    }
+
+    .reply-btn{
+        width:50%;
+        font-size:1rem;
+    }
+
+    .trees-left, .trees-right{
+        gap:5vw;
+    }
+}
+
+.name-field{
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background: rgba(255,255,255,0.8);
+    text-align:center;
+}
+
+

@@ -1,40 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Merry Christmas</title>
-<link rel="stylesheet" href="/static/style.css">
+<meta charset="UTF-8">
+<title>Christmas Card</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/card.css') }}">
 </head>
+
 <body>
 
-<canvas id="stars"></canvas>
+<!-- Falling Animation Container -->
+<div class="fall-container"></div>
 
-<h1 class = "msgg">
-    🎄 Happy Marry Christmas and a happy new year from <span> 
-        Isaac Wandera</span> 🎄
-</h1>
+<!-- Main Card Message -->
+<div class="card-message">
+   <h1 class="glow">🎄 Merry Christmas {{name}} 🎄</h1>
+   <p class="note">
+      Wishing you joy, peace, and warm moments this festive season.  
+      May your days be filled with love, laughter and blessings.  
+   </p>
+   <p class="from">With Love, <b>Isaac</b> ❤️</p>
+</div>
 
-<h1 class="msg">
-    Wishing you a joyful Christmas filled with love, laughter, and cherished moments with family and friends. 
-    May the New Year bring you happiness, success, and countless blessings. 
-    Merry Christmas and a Happy New Year!
-    <br>
-    <hr>
-    🎉🎊🎇🎆🎇<span><u><i>{{name}}</i></u></span>🎇🎆🎇🎉🎊
-</h1>
+<!-- Bottom Trees (Decoration) -->
+<div class="trees">
+    <img src="/static/images/tree1.png">
+    <img src="/static/images/tree2.png">
+    <img src="/static/images/tree3.png">
+</div>
 
-<audio id="bgMusic" autoplay loop>
-    <source src="/static/music/christmas.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-    // autoplay fix for browsers (plays after first click/tap if blocked)
-    document.body.addEventListener("click", () => {
-        document.getElementById("bgMusic").play();
-    });
-</script>
-
-
-<script src="/static/stars.js"></script>
-<script src="/static/snow.js"></script>
+<script src="{{ url_for('static', filename='js/card.js') }}"></script>
 </body>
 </html>

@@ -1,31 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Christmas Wishes</title>
-<style>
-    body {
-        background: #001;
-        color: white;
-        text-align: center;
-        font-family: Arial;
-        margin-top: 150px;
-    }
-    input {
-        padding: 10px; font-size: 20px; border-radius: 5px;
-    }
-    button {
-        padding: 10px 20px; font-size: 20px; background:red;
-        color:white; border:none; border-radius:5px;
-    }
-</style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Christmas & New Year Card</title>
+<link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-<h1>🎅 Merry Christmas 🎄</h1>
-<form method="POST">
-    <input type="text" name="name" placeholder="Enter your name" required>
-    <button type="submit">Generate Christmas Card</button>
-</form>
+<div class="wrapper">
+
+    <div class="container">
+
+        <h1 class="title">✨ Christmas & New Year Cards ✨</h1>
+        <p class="subtitle">Enter your name and choose a card to get your Ksh.300</p>
+
+        <input type="text" id="username" placeholder="Enter your name..." class="name-input" required>
+
+        <div class="card-options">
+
+            <label class="card-item">
+                <input type="radio" name="card" value="card1">
+                <span>🎄 Merry Christmas Card</span>
+            </label>
+
+            <label class="card-item">
+                <input type="radio" name="card" value="card2">
+                <span>🎉 Happy New Year Card</span>
+            </label>
+
+            <label class="card-item">
+                <input type="radio" name="card" value="card3">
+                <span>💝 Combo Christmas + New Year Card</span>
+            </label>
+
+        </div>
+
+        <button class="btn select-btn" onclick="Continue()">Continue</button>
+
+    </div>
+
+</div>
+
+<audio id="bgMusic" loop>
+   <source src="{{ url_for('static', filename='music/BChristmas.mp3') }}" type="audio/mpeg">
+    Your browser does not support the audio element.
+</audio>
+
+<button id="muteBtn" class="btn" style="margin-top:15px;">🔊 Mute</button>
+
+<script>
+const music = document.getElementById("bgMusic");
+const muteBtn = document.getElementById("muteBtn");
+
+// Play music after first user interaction (required by some browsers)
+document.body.addEventListener("click", function playMusicOnce(){
+    music.play().catch(e=>console.log("Autoplay blocked, click to play"));
+    document.body.removeEventListener("click", playMusicOnce);
+});
+
+// Mute/unmute button
+muteBtn.addEventListener("click", () => {
+    music.muted = !music.muted;
+    muteBtn.textContent = music.muted ? "🔇 Unmute" : "🔊 Mute";
+});
+
+// Stop music when Continue clicked
+function Continue(){
+    let card = document.querySelector('input[name="card"]:checked');
+    let name = document.getElementById("username").value.trim();
+
+    if(name === ""){
+        alert("Please enter your name 😊");
+        return;
+    }
+    if(!card){
+        alert("Please select a card 🎄");
+        return;
+    }
+
+    music.pause();
+    music.currentTime = 0;
+
+    window.location.href = "/card/" + card.value + "?name=" + encodeURIComponent(name);
+
+}
+</script>
+
+
+
 
 </body>
 </html>

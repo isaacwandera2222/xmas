@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Christmas & New Year Combo</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/card3.css') }}">
+</head>
+
+<body>
+
+<!-- Background Video -->
+<video autoplay loop muted playsinline class="bg-video">
+    <source src="{{ url_for('static', filename='videos/Fireworks.mp4') }}" type="video/mp4">
+</video>
+
+<!-- 🔥 Top Scrolling Text -->
+<div class="scroll-banner">
+    <span>✨ Merry Christmas & Happy New Year {{name}} — Thank you for being such a thoughtful and caring person.
+Your support has meant a lot to me, and I truly appreciate every effort you’ve made to visit this site.
+May kindness return to you in abundance. ! ✨</span>
+</div>
+
+<!-- Main Message -->
+<div class="cardMessage">
+    <h1 class="comboGlow">🎄 Merry Christmas & 🎉 Happy New Year {{name}} 🎄</h1>
+
+    <p class="comboNote">
+        ✨🎄 Merry Christmas & Happy New Year 🎆✨
+
+        May your Christmas be filled with joy, love, laughter, and beautiful memories.
+        As we step into the New Year, may blessings follow you, doors open for you, and success light your path.
+        I wish you happiness, peace, good health, and endless opportunities.
+        May 2026 be brighter, kinder, and more fulfilling than ever before.
+
+        Merry Christmas & a Prosperous Happy New Year! 🎉🎁🌟  
+    </p>
+
+    <p class="fromNY">Warm wishes from <b>Isaac</b> ❤️</p>
+
+    <!-- Reply Section -->
+    <div class="reply-section">
+        <h2>💌 Send Your Christmas & New Year Reply and share the link to 20 friends and get Ksh.300</h2>
+
+        <input type="text" id="usernameInput" placeholder="Enter your name..." required>
+
+        <textarea id="replyText" placeholder="Write your message..." required></textarea>
+
+        <button class="reply-btn" onclick="sendReply()">Send Reply</button>
+        <p id="replyStatus"></p>
+    </div>
+</div>
+
+<!-- Trees -->
+<div class="trees-left">
+    <img src="{{ url_for('static', filename='images/tree1.png') }}">
+    <img src="{{ url_for('static', filename='images/tree2.png') }}">
+    <img src="{{ url_for('static', filename='images/tree3.png') }}">
+</div>
+
+<div class="trees-right">
+    <img src="{{ url_for('static', filename='images/tree4.png') }}">
+    <img src="{{ url_for('static', filename='images/tree5.png') }}">
+    <img src="{{ url_for('static', filename='images/tree6.png') }}">
+</div>
+
+<!-- Background Music -->
+<audio id="bgMusic" autoplay loop>
+    <source src="{{ url_for('static', filename='music/Christmas.mp3') }}" type="audio/mpeg">
+</audio>
+
+<button class="musicBtn" onclick="toggleMusic()">🔊</button>
+
+<script>
+const music = document.getElementById("bgMusic");
+const btn = document.querySelector(".musicBtn");
+
+function toggleMusic(){
+    music.muted = !music.muted;
+    btn.textContent = music.muted ? "🔇" : "🔊";
+}
+
+function sendReply(){
+    let name = document.getElementById("usernameInput").value.trim();
+    let message = document.getElementById("replyText").value.trim();
+
+    if(name === "") return alert("Please enter your name 😄");
+    if(message === "") return alert("Write a reply 🙏");
+
+    let text = `Hello Isaac, I am ${name}. Combo Card Reply: ${message}`;
+    let phone = "254733903368";
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`,"_blank");
+
+    document.getElementById("replyText").value = ""; 
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year Card</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/card2.css') }}">
+</head>
+
+<body>
+
+<!-- Countdown Screen -->
+<div id="countdownScreen" class="countdownPage">
+    <h1 class="countTitle">🎉 Countdown to New Year 🎉</h1>
+    <h2 id="countdown" class="glowTimer"></h2>
+    <audio id="countMusic" autoplay loop>
+        <source src="/static/music/Count.mp3" type="audio/mp3">
+    </audio>
+</div>
+
+<div id="realCard" style="display:none;">
+
+    <!-- 🎆 Background Video Autofit Responsive -->
+    <video autoplay loop muted playsinline class="bg-video">
+        <source src="{{ url_for('static', filename='videos/Fireworks.mp4') }}" type="video/mp4">
+    </video>
+
+    <!-- 🔥 Background Music (User controlled) -->
+    <audio id="nyMusic" loop>
+        <source src="{{ url_for('static', filename='music/Firework.mp3') }}" type="audio/mpeg">
+    </audio>
+
+    <button class="musicBtn" onclick="toggleMusic()">🎵 Music</button>
+
+    <!-- ================= MAIN CARD ================= -->
+    <div class="cardMessage">
+        <h1 class="newYearGlow">✨ Happy New Year {{name}} ✨</h1>
+
+        <p class="newNote">
+            Happy New Year 2026! 🎆 As we step into this brand-new year,
+            may every day be filled with hope, happiness, 
+            and endless possibilities. May you find the courage to chase your dreams, 
+            the wisdom to learn from every experience, 
+            and the strength to overcome every challenge that comes your way. 
+            May laughter and love surround you, 
+            and may each moment be a reminder of how beautiful life can be. 
+            Let this year bring new opportunities, unforgettable memories, 
+            and growth in every aspect of your life—physically, mentally, and spiritually. 
+            Here’s to a year of positivity, success, and making every day count. 
+            Cheers to new beginnings and all the adventures 2026 has in store for you!  
+        </p>
+
+        <p class="fromNY">Best Wishes from <b>Isaac</b> 🎉</p>
+
+        <!-- ================= Reply Section ================= -->
+        <div class="reply-section">
+            <h2>🎆 Send your New Year Wish and share the link with 10 friends to get Ksh.300 🎇</h2>
+
+            <input type="text" id="usernameInput" placeholder="Enter your name..." required>
+
+            <textarea id="replyText" placeholder="Write your message..." required></textarea>
+
+            <button class="reply-btn" onclick="sendReply()">Send Reply</button>
+            <p id="replyStatus"></p>
+        </div>
+    </div>
+
+    <!-- Trees Decoration -->
+    <div class="trees-left">
+        <img src="{{ url_for('static', filename='images/tree1.png') }}">
+        <img src="{{ url_for('static', filename='images/tree2.png') }}">
+        <img src="{{ url_for('static', filename='images/tree3.png') }}">
+    </div>
+
+    <div class="trees-right">
+        <img src="{{ url_for('static', filename='images/tree4.png') }}">
+        <img src="{{ url_for('static', filename='images/tree5.png') }}">
+        <img src="{{ url_for('static', filename='images/tree6.png') }}">
+    </div>
+
+
+    <!-- ================= JS ================= -->
+    <script>
+    /* Auto Play Music on Page Load */
+    window.onload = function(){
+        let audio = document.getElementById("nyMusic");
+        audio.volume = 0.5;   // adjust loudness
+        audio.play().catch(()=>{}); // prevents browser block errors
+    }
+
+    /* Mute / Unmute Toggle */
+    function toggleMusic(){
+        let audio = document.getElementById("nyMusic");
+        let btn = document.querySelector(".musicBtn");
+
+        if(audio.muted){
+            audio.muted = false;
+            btn.innerText = "🔊";   // unmuted icon
+        } else {
+            audio.muted = true;
+            btn.innerText = "🔇";   // muted icon
+        }
+    }
+
+    /* WhatsApp Sender */
+    function sendReply(){
+        let name = document.getElementById("usernameInput").value.trim();
+        let message = document.getElementById("replyText").value.trim();
+
+        if(name === "") return alert("Enter your name 😊");
+        if(message === "") return alert("Write a reply 🎉");
+
+        let text = `Hello Isaac, I am ${name}. My New Year Message:\n ${message}`;
+        let phone = "254733903368";
+        let url = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+
+        window.open(url, "_blank");
+
+        /* Clear message box */
+        document.getElementById("replyText").value = "";
+    }
+    </script>
+
+</div>
+
+<script>
+/* ========== COUNTDOWN CONFIG ========== */
+
+/* Test countdown 30 seconds (for now) */
+let countDate = new Date("Jan 1, 2026 00:00:00").getTime();  
+
+/* For real event replace with ↓ */
+// let countDate = new Date("Jan 1, 2026 00:00:00").getTime();
+
+let timer = setInterval(function(){
+    let now = new Date().getTime();
+    let distance = countDate - now;
+
+    let days = Math.floor(distance/(1000*60*60*24));
+    let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    let min = Math.floor((distance%(1000*60*60))/(1000*60));
+    let sec = Math.floor((distance%(1000*60))/1000);
+
+    document.getElementById("countdown").innerHTML = 
+        `${days}D : ${hours}H : ${min}M : ${sec}S`;
+
+    /* When countdown ends */
+    if(distance < 0){
+        clearInterval(timer);
+
+        document.getElementById("countdownScreen").style.display = "none";
+        document.getElementById("realCard").style.display = "block";
+
+        document.getElementById("countMusic").pause();
+        document.getElementById("bgMusic").play();
+    }
+},1000);
+
+
+/* ========== Toggle Music ========== */
+function toggleMusic(){
+    let music = document.getElementById("bgMusic");
+    music.paused ? music.play() : music.pause();
+}
+</script>
+
+
+</body>
+</html>

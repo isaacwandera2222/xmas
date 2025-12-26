@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Christmas Card</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/card1.css') }}">
+</head>
+
+<body>
+
+<!-- Dancing Santa Video -->
+<video class="dancing-santa" autoplay loop muted playsinline>
+    <source src="{{ url_for('static', filename='videos/dancing.mp4') }}" type="video/mp4">
+</video>
+
+
+<!-- Audio Player (hidden) -->
+<audio id="bgMusic" src="{{ url_for('static', filename='music/Child.mp3') }}" autoplay loop></audio>
+
+<!-- Mute/Unmute Button -->
+<button id="soundBtn" onclick="toggleSound()">🔊</button>
+
+
+<div class="fall-container"></div>
+
+<div class="card-message">
+   <h1 class="glow">🎄 Merry Christmas {{name}} 🎄</h1>
+   <p class="note">
+      Merry Christmas,  {{name}} !
+      May this season fill your heart with joy, peace, and endless blessings.
+      I hope your days are filled with good memories, warm laughter, and the company of people who make life special.
+
+      May the light of Christmas guide you into a prosperous and fulfilling new year, and may every dream you carry into 2026 find its path. 🌟
+
+      You deserve happiness, success, and beautiful moments — today and always.
+      Merry Christmas once again, and may love shine brightly in your home. 🎁✨  
+   </p>
+   
+   <p class="from">Happy Christmas With Love from <span class="glow"><u>Isaac Wandera</u></span> ❤️</p>
+
+   <!-- Reply Box -->
+<div class="reply-section">
+    <h2>🎁 Send a Christmas Reply and share the link with 10 friends to receive your Ksh.300 🎄</h2>
+    <input type="text" id="usernameInput" placeholder="Enter your name..." class="name-field" required>
+    
+    <textarea id="replyText" placeholder="Write your reply here..." required></textarea>
+
+    <button class="reply-btn" onclick="sendReply()">Send Reply</button>
+
+    <p id="replyStatus"></p>
+</div>
+
+</div>
+
+
+
+<div class="trees-left">
+    <img src="/static/images/tree1.png">
+    <img src="/static/images/tree2.png">
+    <img src="/static/images/tree3.png">
+</div>
+
+<div class="trees-right">
+    <img src="/static/images/tree4.png">
+    <img src="/static/images/tree5.png">
+    <img src="/static/images/tree6.png">
+</div>
+
+<div id="successPopup">Reply Sent Successfully! 🎄</div>
+
+
+<script src="{{ url_for('static', filename='js/card.js') }}"></script>
+
+<script>
+function createElement(type, className, content, duration){
+    let el = document.createElement("div");
+    el.className = className;
+    el.innerHTML = content;
+    el.style.left = Math.random()*100+"vw";
+    el.style.animationDuration = duration+"s";
+    document.body.appendChild(el);
+
+    setTimeout(()=> el.remove(), duration*1000);
+}
+
+// Snow every 300ms
+setInterval(()=> createElement("div","snowflake","❄",8+Math.random()*5),300);
+
+// Star every 500ms
+setInterval(()=> createElement("div","star","✦",7+Math.random()*5),500);
+</script>
+
+<script>
+function toggleSound(){
+    let music = document.getElementById("bgMusic");
+    let btn   = document.getElementById("soundBtn");
+
+    if(music.muted){
+        music.muted = false;
+        btn.innerHTML = "🔊";   // unmuted icon
+    } else {
+        music.muted = true;
+        btn.innerHTML = "🔇";   // muted icon
+    }
+}
+
+// Ensure it plays automatically even on mobile
+document.addEventListener("click", ()=> {
+    let music = document.getElementById("bgMusic");
+    if(music.paused) music.play();
+},{once:true});
+</script>
+
+
+<script>
+function sendReply(){
+    let text = document.getElementById("replyText").value.trim();
+
+    if(text === ""){
+        alert("Please write something ❤️");
+        return;
+    }
+
+    document.getElementById("replyStatus").innerHTML = "Reply sent! (Feature under development)";
+    
+    // In future — send to server, Telegram, email etc.
+}
+</script>
+
+<script>
+   function sendReply(){
+    let name = document.getElementById("usernameInput").value.trim();
+    let message = document.getElementById("replyText").value.trim();
+
+    if(name === ""){
+        alert("Please enter your name 😊");
+        return;
+    }
+    if(message === ""){
+        alert("Please type your reply 🎄");
+        return;
+    }
+
+    // reply text formatting
+    let text = `Hello Isaac, I am ${name}. My Christmas reply: ${message}`;
+    let phone = "254733903368"; // <-- YOUR WhatsApp NUMBER HERE
+    let whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(text)}`;
+
+    window.open(whatsappUrl, "_blank");
+
+    // Show popup
+    let popup = document.getElementById("successPopup");
+    popup.style.display = "block";
+    setTimeout(()=> popup.style.display = "none", 3000);
+
+    // Clear text box & name if you want
+    document.getElementById("replyText").value = "";
+}
+
+</script>
+
+
+</body>
+</html>

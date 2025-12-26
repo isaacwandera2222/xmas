@@ -1,0 +1,147 @@
+body{
+    margin:0;
+    overflow-y:auto;
+    font-family:Poppins,sans-serif;
+    color:white;
+}
+
+/* Video */
+.bg-video{
+    position:fixed;
+    top:0; left:0;
+    width:100vw;
+    height:100vh;
+    object-fit:cover;
+    z-index:-2;
+}
+
+/* 🔥 Scrolling Banner */
+.scroll-banner{
+    width:100%;
+    white-space:nowrap;
+    overflow:hidden;
+    background:rgba(0,0,0,0.6);
+    padding:12px 0;
+    font-size:22px;
+    color:gold;
+    border-bottom:2px solid gold;
+    position:relative;
+    z-index:6;
+}
+.scroll-banner span{
+    display:inline-block;
+    animation:scroll 30s linear infinite;
+}
+@keyframes scroll{
+    0%{transform:translateX(100%);}
+    100%{transform:translateX(-100%);}
+}
+
+/* Card Content */
+.cardMessage{
+    text-align:center;
+    margin-top:10%;
+    max-width:900px;
+    width:85%;
+    margin:auto;
+    color:white;
+    position:relative;
+    z-index:5;
+}
+
+.comboGlow{
+    font-size:50px;
+    font-weight:bold;
+    color:#00ffea;
+    text-shadow:0 0 10px cyan,0 0 25px aqua,0 0 45px white;
+}
+
+.comboNote{
+    font-size:21px;
+    margin-top:18px;
+    line-height:1.5;
+}
+
+.fromNY{ font-size:23px;margin-top:10px; }
+
+/* Reply Box */
+.reply-section{
+    margin-top:40px;
+    background:rgba(255,255,255,0.08);
+    padding:25px;
+    border-radius:15px;
+    border:2px solid #00eaff;
+    box-shadow:0 0 20px cyan;
+    z-index:10;
+}
+
+/* Inputs */
+.reply-section input,
+.reply-section textarea{
+    width:95%;
+    font-size:20px;
+    padding:15px;
+    border-radius:12px;
+    background:rgba(255,255,255,0.15);
+    border:1px solid #00eaff;
+    color:white;
+    margin-top:10px;
+}
+
+/* Button */
+.reply-btn{
+    margin-top:12px;
+    padding:14px 28px;
+    font-size:18px;
+    border-radius:50px;
+    color:white;
+    background:transparent;
+    border:2px solid cyan;
+    cursor:pointer;
+    transition:.3s;
+}
+.reply-btn:hover{
+    background:cyan;
+    color:black;
+}
+
+/* Music Btn */
+.musicBtn{
+    position:fixed;
+    top:15px; right:20px;
+    background:rgba(0,0,0,0.7);
+    border:2px solid cyan;
+    padding:12px;
+    border-radius:50%;
+    color:cyan;
+    font-size:22px;
+    cursor:pointer;
+    z-index:20;
+}
+
+/* Trees */
+.trees-left,.trees-right{
+    position:fixed;
+    bottom:0;
+    display:flex;
+    gap:10px;
+    z-index:1;
+}
+
+.trees-left{ left:5px; }
+.trees-right{ right:5px; }
+
+.trees-left img,.trees-right img{
+    width:85px;
+    animation:float 3s infinite alternate;
+}
+@keyframes float{
+    from{transform:translateY(0);}
+    to{transform:translateY(-12px);}
+}
+
+@media(max-width:600px){
+    .comboGlow{font-size:30px;}
+    .trees-left img,.trees-right img{width:55px;}
+    .scroll-banner{font-size:16px;}
+}

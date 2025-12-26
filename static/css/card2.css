@@ -1,0 +1,183 @@
+body{
+    margin:0;
+    overflow:hidden;
+    font-family: "Poppins", sans-serif;
+    color:white;
+    overflow-y: auto;    /* scrollbar enabled */
+    min-height: 120vh;   /* allow scrolling */
+}
+
+/* FULLSCREEN VIDEO BACKGROUND */
+.bg-video{
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;     /* auto-fit responsive */
+    z-index: -1;
+}
+
+/* Page content styling */
+.cardMessage{
+    text-align: center;
+    color: #fff;
+    margin-top: 7%;
+    width: 80%;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    backdrop-filter: brightness(1.1);
+    position: relative;   
+    z-index: 5; 
+}
+
+/* Gold glow style */
+.newYearGlow{
+    font-size: 55px;
+    font-weight: bold;
+    color: gold;
+    text-shadow: 0 0 10px gold, 0 0 25px orange, 0 0 40px yellow;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{ text-shadow: 0 0 10px gold, 0 0 20px orange; }
+    to{ text-shadow: 0 0 25px yellow, 0 0 45px white; }
+}
+
+.newNote{
+    font-size: 20px;
+    margin-top: 20px;
+    line-height: 1.5;
+}
+
+.fromNY{
+    font-size: 22px;
+    margin-top: 10px;
+}
+
+/* reply box glow transparent */
+.reply-section{
+    margin-top: 40px;
+    background: rgba(255,255,255,0.05);
+    padding: 25px;
+    border-radius: 15px;
+    backdrop-filter: blur(4px);
+    border: 2px solid rgba(255,255,255,0.3);
+    box-shadow: 0 0 15px gold, 0 0 25px rgba(255,215,0,0.4);
+    position: relative;   /* ensures z-index works */
+    z-index: 10;          /* in front of trees */
+}
+
+/* ===== Larger Reply Input & Textarea ===== */
+.reply-section input,
+.reply-section textarea{
+    width: 95%;
+    font-size: 20px;               /* bigger text */
+    padding: 16px;                  /* bigger fields */
+    border-radius: 12px;            /* soft rounded edges */
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(3px);
+    border: 1px solid gold;
+    color: white;
+    box-shadow: 0 0 15px gold inset;
+    z-index: 10;
+}
+
+/* ===== Rounded Send Button ===== */
+.reply-btn{
+    background: transparent;
+    color: white;
+    border: 2px solid gold;
+    box-shadow: 0 0 12px gold, 0 0 20px yellow;
+    font-weight: bold;
+    padding: 14px 28px;
+    border-radius: 50px;           /* fully rounded */
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.reply-btn:hover{
+    background: gold;
+    color: black;
+}
+
+
+
+
+/* Music Button */
+.musicBtn{
+    position: fixed;
+    top: 15px; right: 20px;
+    font-size: 22px;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    background: rgba(0,0,0,0.6);
+    color: gold;
+    border: 2px solid gold;
+    z-index: 10;
+}
+
+.musicBtn:hover{
+    background: gold; color: black;
+}
+
+/* Trees */
+.trees-left, .trees-right{
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    gap: 10px;
+    z-index: 0;       
+}
+.trees-left{ left: 5px; }
+.trees-right{ right: 5px; }
+.trees-left img, .trees-right img{
+    width: 90px;
+    animation: float 3s ease-in-out infinite alternate;
+    z-index: 1;
+}
+@keyframes float{
+    from{ transform: translateY(0); }
+    to{ transform: translateY(-10px); }
+}
+
+/* Mobile */
+@media(max-width:600px){
+    .newYearGlow{ font-size: 35px; }
+    .trees-left img, .trees-right img{ width: 55px; }
+}
+
+/* COUNTDOWN SCREEN */
+.countdownPage{
+    position: fixed;
+    top:0; left:0;
+    width:100vw; height:100vh;
+    background:black;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+    z-index:9999;
+}
+
+.countTitle{
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+.glowTimer{
+    font-size:55px;
+    font-weight:bold;
+    animation: glowT 1.5s infinite alternate;
+}
+
+@keyframes glowT{
+    from{ text-shadow:0 0 20px gold; }
+    to{ text-shadow:0 0 40px yellow; }
+}
+
+
