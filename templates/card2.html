@@ -7,18 +7,6 @@
 </head>
 
 <body>
-
-<!-- Countdown Screen -->
-<div id="countdownScreen" class="countdownPage">
-    <h1 class="countTitle">🎉 Countdown to New Year 🎉</h1>
-    <h2 id="countdown" class="glowTimer"></h2>
-    <audio id="countMusic" autoplay loop>
-        <source src="/static/music/Count.mp3" type="audio/mp3">
-    </audio>
-</div>
-
-<div id="realCard" style="display:none;">
-
     <!-- 🎆 Background Video Autofit Responsive -->
     <video autoplay loop muted playsinline class="bg-video">
         <source src="{{ url_for('static', filename='videos/Firework.mp4') }}" type="video/mp4">
@@ -119,49 +107,6 @@
         document.getElementById("replyText").value = "";
     }
     </script>
-
-</div>
-
-<script>
-/* ========== COUNTDOWN CONFIG ========== */
-
-/* Test countdown 30 seconds (for now) */
-let countDate = new Date("Jan 1, 2026 00:00:00").getTime();  
-
-/* For real event replace with ↓ */
-// let countDate = new Date("Jan 1, 2026 00:00:00").getTime();
-
-let timer = setInterval(function(){
-    let now = new Date().getTime();
-    let distance = countDate - now;
-
-    let days = Math.floor(distance/(1000*60*60*24));
-    let hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
-    let min = Math.floor((distance%(1000*60*60))/(1000*60));
-    let sec = Math.floor((distance%(1000*60))/1000);
-
-    document.getElementById("countdown").innerHTML = 
-        `${days}D : ${hours}H : ${min}M : ${sec}S`;
-
-    /* When countdown ends */
-    if(distance < 0){
-        clearInterval(timer);
-
-        document.getElementById("countdownScreen").style.display = "none";
-        document.getElementById("realCard").style.display = "block";
-
-        document.getElementById("countMusic").pause();
-        document.getElementById("bgMusic").play();
-    }
-},1000);
-
-
-/* ========== Toggle Music ========== */
-function toggleMusic(){
-    let music = document.getElementById("bgMusic");
-    music.paused ? music.play() : music.pause();
-}
-</script>
 
 
 </body>
